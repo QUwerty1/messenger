@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class CatalogConfig(AppConfig):
+class MessengerConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'catalog'
+    name = 'messenger'
