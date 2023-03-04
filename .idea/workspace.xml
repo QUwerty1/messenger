@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="45f65c27-a46a-49f5-94c8-4a66b29af7cd" name="Changes" comment="initial commit">
-      <change afterPath="$PROJECT_DIR$/server/messenger/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/messenger/migrations/0002_alter_message_content.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/messenger/templates/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/messenger/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/messenger/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/messenger/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/messenger/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/messenger/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/messenger/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/messenger/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/server/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/server/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/pyvenv.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +86,8 @@
       <workItem from="1677400924303" duration="7420000" />
       <workItem from="1677491455977" duration="596000" />
       <workItem from="1677552829967" duration="15000" />
+      <workItem from="1677895767425" duration="434000" />
+      <workItem from="1677896298741" duration="899000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1677401099495</created>
