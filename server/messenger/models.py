@@ -1,25 +1,36 @@
 from django.db import models
+import json
+from ..users.models import User
 
 
-class User(models.Model):
-
-    def __str__(self):
-        return f"{self.id}. {self.firstname} {self.email}"
-
-    id = models.AutoField().primary_key
-    email = models.EmailField()
-    firstname = models.CharField(max_length=30)
-    surname = models.CharField(max_length=30)
-    gender = models.CharField(max_length=1)
-    chats = models.JSONField()
-    info = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+# class User(models.Model):
+#     def __str__(self):
+#         return f"{self.id}. {self.firstname} {self.email}"
+#
+#     id = models.AutoField().primary_key
+#     email = models.EmailField()
+#     firstname = models.CharField(max_length=30)
+#     surname = models.CharField(max_length=30)
+#     gender = models.CharField(max_length=1)
+#     chats = models.JSONField()
+#     info = models.TextField()
+#     created_at = models.DateTimeField(auto_now_add=True)
 
 
 class Chat(models.Model):
 
     def __str__(self):
         return f"{self.id}. {self.name}"
+
+    @staticmethod
+    def create(name: str, user: User):
+        chat = Chat(name=name, user=json.JSONEncoder.encode([user]))
+        chat.save()
+        return chat
+
+    @staticmethod
+    def add_user(chat_id: int, user: User):
+        chat = models.object
 
     id = models.AutoField().primary_key
     name = models.CharField(max_length=30)
@@ -31,9 +42,15 @@ class Content(models.Model):
     def __str__(self):
         return f"{self.id}: {self.text[0:50]}"
 
+    @staticmethod
+    def create(text: str, files: list):
+        content = Content(text=text, files=files)
+        content.save()
+        return content
+
     id = models.AutoField().primary_key
     text = models.TextField()
-    files = models.JSONField()
+    files = models.JSONField(default=json.JSONEncoder.encode([]))
 
 
 class Message(models.Model):
@@ -41,9 +58,12 @@ class Message(models.Model):
     def __str__(self):
         return f"{self.author}: {self.content}"
 
-    def add_message(self, user: User, text: str, files: list, chat: Chat):
-        content = Content.object.create(text=text, files=files)
-        self.object.create(author=user, chat=chat, content=content)
+    @staticmethod
+    def create(user: User, text: str, files: list, chat: Chat):
+        content = Content.create(text=text, files=files)
+        message = Message(author=user, chat=chat, content=content)
+        message.save()
+        return message
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
