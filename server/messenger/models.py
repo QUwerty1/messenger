@@ -24,7 +24,7 @@ class Chat(models.Model):
 
     @staticmethod
     def create(name: str, user: User):
-        chat = Chat(name=name, user=json.JSONEncoder.encode([user]))
+        chat = Chat(name=name, users=json.JSONEncoder.encode([user]))
         chat.save()
         return chat
 
