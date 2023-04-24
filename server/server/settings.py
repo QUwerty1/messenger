@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'messenger.apps.MessengerConfig',
-    'users.apps.UserConfig'
+    'users.apps.UserConfig',
+    'channels',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -73,6 +75,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'server.wsgi.application'
+ASGI_APPLICATION = 'config.asgi.application'
 
 
 # Database
@@ -84,10 +87,20 @@ DATABASES = {
         'NAME': 'messenger',
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': 'localhost'
+        'HOST': 'openserver'
     }
 }
 
+# ASGI_APPLICATION = "olympia.routing.application"
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": 'localhost',
+            "symmetric_encryption_keys": [SECRET_KEY],
+        },
+    },
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -130,4 +143,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.CustomUser'
+
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher'
+]

@@ -1,6 +1,9 @@
 from django.db import models
 import json
-from ..users.models import User
+from users.models import CustomUser as User
+
+encoder = json.JSONEncoder()
+decoder = json.JSONDecoder()
 
 
 # class User(models.Model):
@@ -24,13 +27,25 @@ class Chat(models.Model):
 
     @staticmethod
     def create(name: str, user: User):
-        chat = Chat(name=name, users=json.JSONEncoder.encode([user]))
+        chat = Chat(name=name, users=json.loads(user.id))
         chat.save()
         return chat
 
     @staticmethod
     def add_user(chat_id: int, user: User):
-        chat = models.object
+        chat = Chat.objects.filter(id=chat_id)
+
+        users = decoder.decode(chat.users)
+        users.append(user.id)
+        chat.users = encoder.encode(user)
+
+        chats = decoder.decode(user.chats)
+        chats.append(chat.id)
+        user.chats = encoder.encode(chat)
+
+        chat.save()
+
+        return chat
 
     id = models.AutoField().primary_key
     name = models.CharField(max_length=30)
@@ -50,7 +65,7 @@ class Content(models.Model):
 
     id = models.AutoField().primary_key
     text = models.TextField()
-    files = models.JSONField(default=json.JSONEncoder.encode([]))
+    files = models.JSONField(default=encoder.encode([]))
 
 
 class Message(models.Model):
