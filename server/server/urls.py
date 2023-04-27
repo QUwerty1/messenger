@@ -20,6 +20,6 @@ from django.http import HttpRequest
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('messenger/', include('messenger.urls'))
+    path('m/', include('messenger.urls'))
     # path('/messenger/', messenger.views.index(HttpRequest))
 ]
