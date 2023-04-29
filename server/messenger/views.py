@@ -92,5 +92,8 @@ def token(request):
     }))
 
 
+@csrf_exempt
 def test(request):
+    context = request.POST.get('var')
+    print(context)
     return render(request, 'index.html')
