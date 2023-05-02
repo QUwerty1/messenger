@@ -26,8 +26,8 @@ class Chat(models.Model):
         return f"{self.id}. {self.name}"
 
     @staticmethod
-    def create(name: str, user: User):
-        chat = Chat(name=name, users=json.loads(user.id))
+    def create(name: str, user_id):
+        chat = Chat(name=name, users=json.dumps([user_id]))
         chat.save()
         return chat
 
